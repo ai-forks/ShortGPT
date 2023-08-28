@@ -90,7 +90,7 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
                 max_tokens=max_tokens,
                 temperature=temp)"""
             print(f"create chat msg={messages} ")
-            res = requests.post(url="https://www.iuku.xyz/chat/gpt", data=json.dumps({"messages": messages}), headers: {"content-type": "application/json"})
+            res = requests.post(url="https://www.iuku.xyz/chat/gpt", data=json.dumps({"messages": messages}), headers= {"content-type": "application/json"})
             response = res.json()
             text = response['choices'][0]['message']['content'].strip()
             if remove_nl:
