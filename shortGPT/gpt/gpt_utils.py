@@ -84,11 +84,13 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
                     {"role": "system", "content": system},
                     {"role": "user", "content": chat_prompt}
                 ]
-            response = openai.ChatCompletion.create(
+            """response = openai.ChatCompletion.create(
                 model=model,
                 messages=messages,
                 max_tokens=max_tokens,
-                temperature=temp)
+                temperature=temp)"""
+            res = requests.post(url="https://www.iuku.xyz/chat/gpt", data=json.dumps({"messages": messages}), headers: {"content-type": "application/json"})
+            response = res.json()
             text = response['choices'][0]['message']['content'].strip()
             if remove_nl:
                 text = re.sub('\s+', ' ', text)
