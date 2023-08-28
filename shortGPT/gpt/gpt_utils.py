@@ -6,6 +6,7 @@ from time import sleep, time
 import openai
 import tiktoken
 import yaml
+import requests
 
 from shortGPT.config.api_db import ApiKeyManager
 
@@ -75,6 +76,7 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
     retry = 0
     while True:
         try:
+            startTime = time()
             if conversation:
                 messages = conversation
             else:
@@ -95,6 +97,9 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
                 os.makedirs('.logs/gpt_logs')
             with open('.logs/gpt_logs/%s' % filename, 'w', encoding='utf-8') as outfile:
                 outfile.write(f"System prompt: ===\n{system}\n===\n"+f"Chat prompt: ===\n{chat_prompt}\n===\n" + f'RESPONSE:\n====\n{text}\n===\n')
+            ttl = time() - startTime
+            if ttl < 20 :
+                sleep(20 - ttl)
             return text
         except Exception as oops:
             retry += 1
