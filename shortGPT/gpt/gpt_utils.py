@@ -7,6 +7,7 @@ import openai
 import tiktoken
 import yaml
 import requests
+from datetime import datetime
 
 from shortGPT.config.api_db import ApiKeyManager
 
@@ -89,7 +90,7 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
                 messages=messages,
                 max_tokens=max_tokens,
                 temperature=temp)"""
-            print(f"create chat msg={messages} ")
+            print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} create chat msg={messages} ")
             res = requests.post(url="https://www.iuku.xyz/chat/gpt", data=json.dumps({"messages": messages}), headers= {"content-type": "application/json"})
             response = res.json()
             text = response['choices'][0]['message']['content'].strip()
