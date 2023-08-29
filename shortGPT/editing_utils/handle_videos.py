@@ -49,7 +49,7 @@ def extract_random_clip_from_video(video_url, video_duration, clip_duration , ou
     if not video_duration*0.7 > 120:
         raise Exception("Video too short")
     start_time = video_duration*0.15 + random.random()* (0.7*video_duration-clip_duration)
-    print(f"output video {output_file} start_time={start_time} ")
+    print(f"output video input={video_url} output={output_file} start_time={start_time} ")
     (
         ffmpeg
         .input(video_url, ss=start_time, t=clip_duration)
