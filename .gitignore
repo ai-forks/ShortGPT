@@ -11,6 +11,7 @@ public/*
 z_doc/*
 z_other/*
 videos/*
+venv/
 .logs/
 .editing_assets/*
 .database/api_db.json
