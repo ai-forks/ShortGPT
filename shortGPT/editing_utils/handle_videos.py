@@ -50,12 +50,26 @@ def extract_random_clip_from_video(video_url, video_duration, clip_duration , ou
         raise Exception("Video too short")
     start_time = video_duration*0.15 + random.random()* (0.7*video_duration-clip_duration)
     print(f"output video input={video_url} output={output_file} start_time={start_time} ")
-    (
+    """     (
         ffmpeg
         .input(video_url, ss=start_time, t=clip_duration)
         .output(output_file, codec="libx264", preset="ultrafast")
         .run()
-    )
+    ) """
+    commond = [
+        'ffmpeg', 
+        "-hwaccel", "cuvid",
+        "-i", video_url,
+        "-ss", str(start_time),  
+        "-t", str(clip_duration),
+        "-c:v", "h264_nvenc",
+        "-b:v", "2048k",
+        "-vf", "scale_npp=1280:-1",
+        "-y",
+        output_file
+    ]
+    print(f"commond={' '.join(commond)}")
+    subprocess.run(commond)
     if not os.path.exists(output_file):
         raise Exception("Random clip failed to be written")
     return output_file
