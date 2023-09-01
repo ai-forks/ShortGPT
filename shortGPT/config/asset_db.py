@@ -127,6 +127,8 @@ class AssetDatabase:
         Returns:
             str: Link to the asset.
         """
+        print(f"===>local_assets=[{cls.local_assets._get()}]")
+        print(f"===>remote_assets=[{cls.remote_assets._get()}]")
         if key in cls.local_assets._get():
             return cls._update_local_asset_timestamp_and_get_link(key)
         elif key in cls.remote_assets._get():
@@ -298,10 +300,13 @@ class AssetDatabase:
         Returns:
             str: Duration of the asset.
         """
+        if remote_url is None :
+            return None, duration
+        
         asset = cls.remote_assets._get(key)
         youtube_url = asset['url']
         remote_url, duration = get_asset_duration(youtube_url, isVideo="video" in asset['type'])
-        print(f"update_youtube_asset_duration key={key} youtube_url={youtube_url} remote_url={remote_url} duration={duration}")
+        print(f"update_youtube_asset_duration key=[{key}] youtube_url={youtube_url} remote_url={remote_url} duration={duration}")
         asset.update({
             "remote_url": base64.b64encode(remote_url.encode()).decode('utf-8'),
             "duration": duration,
