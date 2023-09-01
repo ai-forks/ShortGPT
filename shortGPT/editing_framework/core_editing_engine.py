@@ -211,6 +211,7 @@ class CoreEditingEngine:
             raise Exception('You must include at least a size or a fontsize to determine the size of your text')
         text_clip_params['txt'] = text_clip_params['text']
         clip_info = {k: text_clip_params[k] for k in ('txt', 'fontsize', 'font', 'color', 'stroke_width', 'stroke_color', 'size', 'kerning', 'method', 'align') if k in text_clip_params}
+        print(f"process_text_asset {text_clip_params}")
         clip = TextClip(**clip_info)
 
         return self.process_common_visual_actions(clip, asset['actions'])
