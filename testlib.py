@@ -5,7 +5,6 @@ from moviepy.editor import (AudioFileClip, CompositeVideoClip,CompositeAudioClip
 
 
 
-# subprocess.run(commond)
 def test_ffmpeg():
     print(f"==============test lib ffmpeg")
     #ffmpeg -hwaccel cuvid  -i v1_cut.mp4 -c:v h264_nvenc -b:v 2048k -vf scale_npp=1280:-1 -y outputs/x3.mp4
@@ -24,6 +23,7 @@ def test_ffmpeg():
         "/app/videos/xx.gpt.mp4"
     ]
     print(f"commond={' '.join(commond)}")
+    subprocess.run(commond)
 
 def test_moviepy_editor():
     print(f"==============test lib moviepy_editor imagemagick ghostscript")
