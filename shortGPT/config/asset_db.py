@@ -301,7 +301,7 @@ class AssetDatabase:
         asset = cls.remote_assets._get(key)
         youtube_url = asset['url']
         remote_url, duration = get_asset_duration(youtube_url, isVideo="video" in asset['type'])
-        print(f"update_youtube_asset_duration youtube_url={youtube_url} remote_url={remote_url} duration={duration}")
+        print(f"update_youtube_asset_duration key={key} youtube_url={youtube_url} remote_url={remote_url} duration={duration}")
         asset.update({
             "remote_url": base64.b64encode(remote_url.encode()).decode('utf-8'),
             "duration": duration,
