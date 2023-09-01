@@ -46,3 +46,4 @@ def test_pexels():
 test_ffmpeg()
 test_moviepy_editor()
 test_youtube()
+test_pexels()
