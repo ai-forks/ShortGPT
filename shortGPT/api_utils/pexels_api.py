@@ -15,6 +15,7 @@ def search_videos(query_string, orientation_landscape=True):
     }
 
     response = requests.get(url, headers=headers, params=params)
+    print(f"search_videos pexels {url} status={response.status_code}")
     json_data = response.json()
     # print(response.headers['X-Ratelimit-Limit'])
     # print(response.headers['X-Ratelimit-Remaining'])
