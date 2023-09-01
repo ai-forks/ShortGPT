@@ -2,7 +2,7 @@
 import subprocess
 from moviepy.editor import (AudioFileClip, CompositeVideoClip,CompositeAudioClip, ImageClip,
                             TextClip, VideoFileClip, vfx,)
-
+from shortGPT.audio.audio_duration import getYoutubeVideoLink
 
 
 def test_ffmpeg():
@@ -33,5 +33,11 @@ def test_moviepy_editor():
     print(f"process_text_asset {text_clip_params}")
     clip = TextClip(**clip_info)
 
+def test_youtube():
+    url, duration = getYoutubeVideoLink("https://www.youtube.com/watch?v=V6l4E9tZ7u4")
+    print(f"test_youtube url=[{url}]")
+
+
 test_ffmpeg()
 test_moviepy_editor()
+test_youtube()
