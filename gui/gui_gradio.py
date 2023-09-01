@@ -25,6 +25,7 @@ class ShortGptUI(AbstractBaseUI):
             self.content_automation = GradioContentAutomationUI(shortGptUI).create_ui()
             self.asset_library_ui = AssetLibrary().create_ui()
             self.config_ui = ConfigUI().create_ui()
+        shortGptUI.share_url = "/"
         return shortGptUI
 
     def launch(self):
