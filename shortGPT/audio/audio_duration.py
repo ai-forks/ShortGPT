@@ -12,9 +12,11 @@ def get_duration_yt_dlp(url):
         "no_warnings": True,
         "no_color": True,
         "no_call_home": True,
-        "no_check_certificate": True
+        "no_check_certificate": True,
+        "proxy": os.environ['PROXY'] if 'PROXY' in os.environ else ""
     }
     try:
+        print(f"===>download youtube url={url}")
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             dictMeta = ydl.extract_info(url, download=False, )
             return dictMeta['duration'], ""
@@ -74,9 +76,11 @@ def getYoutubeAudioLink(url):
         "no_color": True,
         "no_call_home": True,
         "no_check_certificate": True,
-        "format": "bestaudio/best"
+        "format": "bestaudio/best",
+        "proxy": os.environ['PROXY'] if 'PROXY' in os.environ else ""
     }
     try:
+        print(f"===>download youtube url={url}")
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             dictMeta = ydl.extract_info(
                 url,

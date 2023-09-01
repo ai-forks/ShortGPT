@@ -13,7 +13,8 @@ def getYoutubeVideoLink(url):
             "no_color": True,
             "no_call_home": True,
             "no_check_certificate": True,
-            "format": "bestvideo[height<=1920]"
+            "format": "bestvideo[height<=1920]",
+            "proxy": os.environ['PROXY'] if 'PROXY' in os.environ else ""
         }
     else:
         ydl_opts = {
@@ -22,9 +23,11 @@ def getYoutubeVideoLink(url):
         "no_color": True,
         "no_call_home": True,
         "no_check_certificate": True,
-        "format": "bestvideo[height<=1080]"
+        "format": "bestvideo[height<=1080]",
+        "proxy": os.environ['PROXY'] if 'PROXY' in os.environ else ""
         }
     try:
+        print(f"===>download youtube url={url}")
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             dictMeta = ydl.extract_info(
                 url,

@@ -18,9 +18,11 @@ def downloadYoutubeAudio(url, outputFile):
         "no_call_home": True,
         "no_check_certificate": True,
         "format": "bestaudio/best",
-        "outtmpl": outputFile
+        "outtmpl": outputFile,
+        "proxy": os.environ['PROXY'] if 'PROXY' in os.environ else ""
     }
     try:
+        print(f"===>download youtube url={url}")
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             dictMeta = ydl.extract_info(
                 url,
