@@ -31,5 +31,5 @@ def test_moviepy_editor():
     print(f"process_text_asset {text_clip_params}")
     clip = TextClip(**clip_info)
 
-# test_ffmpeg()
+test_ffmpeg()
 test_moviepy_editor()
