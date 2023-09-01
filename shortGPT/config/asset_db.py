@@ -127,8 +127,8 @@ class AssetDatabase:
         Returns:
             str: Link to the asset.
         """
-        print(f"===>local_assets=[{cls.local_assets._get()}]")
-        print(f"===>remote_assets=[{cls.remote_assets._get()}]")
+        print(f"===>local_assets=[{cls.local_assets._get()}] key={key}")
+        print(f"===>remote_assets=[{cls.remote_assets._get()}] key={key}")
         if key in cls.local_assets._get():
             return cls._update_local_asset_timestamp_and_get_link(key)
         elif key in cls.remote_assets._get():
