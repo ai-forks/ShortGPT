@@ -3,6 +3,7 @@ import subprocess
 from moviepy.editor import (AudioFileClip, CompositeVideoClip,CompositeAudioClip, ImageClip,
                             TextClip, VideoFileClip, vfx,)
 from shortGPT.audio.audio_duration import getYoutubeVideoLink
+from shortGPT.api_utils.pexels_api import search_videos
 
 
 def test_ffmpeg():
@@ -37,6 +38,10 @@ def test_youtube():
     url, duration = getYoutubeVideoLink("https://www.youtube.com/watch?v=V6l4E9tZ7u4")
     print(f"test_youtube url=[{url}]")
 
+
+def test_pexels():
+    json_data = search_videos("中国女孩")
+    print(f"test_pexels={json_data}")
 
 test_ffmpeg()
 test_moviepy_editor()
