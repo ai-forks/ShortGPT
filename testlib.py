@@ -54,13 +54,13 @@ def test_process_video_asset():
     print(f" is youtube={ p.match(video_url) }")
     if p.match(video_url) :
         filename = "/app/videos/dl/"+datetime.datetime.now().strftime('%Y/%m/%d')+"/"+ hashlib.md5(video_url.encode()).hexdigest()
-        pyt = re.compile('^youtube\.com')
+        pyt = re.compile('youtube\.com')
         commond = [
             'yt-dlp', 
             "--proxy", os.environ['PROXY'] if 'PROXY' in os.environ else "",
-            "-R", 333,
+            "-R", "333",
             "-o", filename,
-            "-f{'22+139' if pyt.match(video_url) else 'mp4' }",
+            f"-f{'22+139' if pyt.match(video_url) else 'mp4' }",
             video_url
         ]            
         print(f"commond={' '.join(commond)}")

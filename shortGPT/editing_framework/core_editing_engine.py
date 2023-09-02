@@ -213,16 +213,11 @@ class CoreEditingEngine:
             commond = [
                 'yt-dlp', 
                 "--proxy", os.environ['PROXY'] if 'PROXY' in os.environ else "",
-                "-R", 333,
-                "-o", params.filename
-                #"-fmp4", video_url,
-                #video_url
+                "-R", "333",
+                "-o", filename,
+                f"-f{'22+139' if pyt.match(video_url) else 'mp4' }",
+                video_url
             ]
-            if pyt.match(video_url):
-                commond.append("-f22+139")
-            else:
-                commond.append("-fmp4")
-
             commond.append(video_url)
             print(f"commond={' '.join(commond)}")
             subprocess.run(commond)
