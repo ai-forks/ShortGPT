@@ -40,7 +40,7 @@ def getYoutubeVideoLink(url):
         print("Failed getting video link from the following video/url", e.args[0])
     return None, None
 
-def downloadYoutubeVideo(url):
+def download_video(url):
     outputFile = "/app/videos/dl/"+datetime.datetime.now().strftime('%Y/%m/%d')+"/"+ hashlib.md5(url.encode()).hexdigest()+".mp4"
     if os.path.exists(outputFile) :
         #duration = get_video_duration(outputFile)

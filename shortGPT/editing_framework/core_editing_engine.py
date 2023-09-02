@@ -4,6 +4,7 @@ magick_path = get_program_path("magick")
 if magick_path:
     os.environ['IMAGEMAGICK_BINARY'] = magick_path
 from shortGPT.config.path_utils import handle_path
+from shortGPT.editing_utils.handle_videos import download_video
 import numpy as np
 import json
 from typing import Any, Dict, List, Union
@@ -203,13 +204,12 @@ class CoreEditingEngine:
         if 'audio' in asset['parameters']:
             params['audio'] = asset['parameters']['audio']
         print(f"process_video_asset step1 asset={asset}")
-        print(f"process_video_asset step2 params={params}")
         # yt-dlp --proxy socks5://172.17.0.1:1080 -fmp4 -R 333  -o '%(channel_id)s/%(release_date)s/%(id)s.mp4' https://player.vimeo.com/external/516795301.hd.mp4?s=b0c2091d3380693ee1e89f35a5ba821dc547ec80&profile_id=175&oauth2_token_id=57447761 
         video_url = params["filename"]
         p = re.compile('^https?:\/\/')
         if p.match(video_url) :
-            params["filename"] = "/app/videos/dl/"+datetime.datetime.now().strftime('%Y/%m/%d')+"/"+ hashlib.md5(video_url.encode()).hexdigest()+".mp4"
-            pyt = re.compile('.*youtube\.com')
+            # params["filename"] = "/app/videos/dl/"+datetime.datetime.now().strftime('%Y/%m/%d')+"/"+ hashlib.md5(video_url.encode()).hexdigest()+".mp4"
+            """ pyt = re.compile('.*youtube\.com')
             commond = [
                 'yt-dlp', 
                 "--proxy", os.environ['PROXY'] if 'PROXY' in os.environ else "",
@@ -220,7 +220,10 @@ class CoreEditingEngine:
             ]
             commond.append(video_url)
             print(f"commond={' '.join(commond)}")
-            subprocess.run(commond)
+            subprocess.run(commond) """
+            params["filename"] = download_video(video_url)
+            print(f"=====>download===output={params['filename']}")
+        print(f"process_video_asset step2 params={params}")
         clip = VideoFileClip(**params)
         print(f"process_video_asset step3 clip={clip}")
         return self.process_common_visual_actions(clip, asset['actions'])
