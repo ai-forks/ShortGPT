@@ -43,8 +43,8 @@ def getYoutubeVideoLink(url):
 def downloadYoutubeVideo(url):
     outputFile = "/app/videos/dl/"+datetime.datetime.now().strftime('%Y/%m/%d')+"/"+ hashlib.md5(url.encode()).hexdigest()+".mp4"
     if os.path.exists(outputFile) :
-        duration = get_video_duration(outputFile)
-        return outputFile, duration
+        #duration = get_video_duration(outputFile)
+        return outputFile
 
     pyt = re.compile('.*youtube\.com')
     ydl_opts = {
@@ -66,15 +66,16 @@ def downloadYoutubeVideo(url):
                 url,
                 download=True)
             print(f"===>download end {dictMeta}")
-            if "duration" not in dictMeta:
-                dictMeta['duration'] = 11
+            #if "duration" not in dictMeta:
+            #    dictMeta['duration'] = 11
 
-            return outputFile, dictMeta['duration']
+            return outputFile
     except Exception as e:
         print("Failed getting video link from the following video/url", e.args[0])
     return None, None
 # 获取视频时长
 def get_video_duration(file):
+    print(f"get_video_duration== {ffmpeg._probe} {ffmpeg.probe}")
     probe = ffmpeg.probe(file)
     print(f"info {probe}")
     return 11
