@@ -57,7 +57,7 @@ def test_download():
     print(f"video duration={duration}")
 
 test_download()
-test_ffmpeg()
-test_moviepy_editor()
-test_youtube()
-test_pexels()
+#test_ffmpeg()
+#test_moviepy_editor()
+#test_youtube()
+#test_pexels()
