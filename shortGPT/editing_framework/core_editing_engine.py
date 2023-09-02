@@ -215,7 +215,7 @@ class CoreEditingEngine:
                 "--proxy", os.environ['PROXY'] if 'PROXY' in os.environ else "",
                 "-R", "333",
                 f"-f{'22+139' if pyt.match(video_url) else 'mp4' }",
-                "-o", filename,
+                "-o", params["filename"],
                 video_url
             ]
             commond.append(video_url)
