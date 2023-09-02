@@ -4,7 +4,9 @@ from moviepy.editor import (AudioFileClip, CompositeVideoClip,CompositeAudioClip
                             TextClip, VideoFileClip, vfx,)
 from shortGPT.audio.audio_duration import getYoutubeVideoLink
 from shortGPT.api_utils.pexels_api import search_videos
-
+import re
+import hashlib
+import datetime
 
 def test_ffmpeg():
     print(f"==============test lib ffmpeg")
