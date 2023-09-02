@@ -62,10 +62,21 @@ def downloadYoutubeVideo(url):
                 url,
                 download=True)
             print(f"===>download end {dictMeta}")
+            if "duration" not in dictMeta:
+                dictMeta['duration'] = 11
+
             return outputFile, dictMeta['duration']
     except Exception as e:
         print("Failed getting video link from the following video/url", e.args[0])
     return None, None
+# 获取视频时长
+def get_video_duration(file):
+    probe = ffmpeg._probe(file)
+    format = probe['format']
+    bit_rate = int(format['bit_rate'])/1000
+    duration = format['duration']
+    size = int(format['size'])/1024/1024
+    return duration
 
 def extract_random_clip_from_video(video_url, video_duration, clip_duration , output_file):
     print(video_url, video_duration, clip_duration , output_file)

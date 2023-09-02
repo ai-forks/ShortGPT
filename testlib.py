@@ -4,7 +4,7 @@ from moviepy.editor import (AudioFileClip, CompositeVideoClip,CompositeAudioClip
                             TextClip, VideoFileClip, vfx,)
 from shortGPT.audio.audio_duration import getYoutubeVideoLink
 from shortGPT.api_utils.pexels_api import search_videos
-from shortGPT.editing_utils.handle_videos import downloadYoutubeVideo
+from shortGPT.editing_utils.handle_videos import downloadYoutubeVideo, get_video_duration
 import re
 import hashlib
 import datetime
@@ -52,6 +52,8 @@ def test_download():
     url = " https://player.vimeo.com/external/516795301.hd.mp4?s=b0c2091d3380693ee1e89f35a5ba821dc547ec80&profile_id=175&oauth2_token_id=57447761"
     outputFile,duration = downloadYoutubeVideo(url)
     print(f"test_download outputFile={outputFile} duration={duration}")
+    duration = get_video_duration(outputFile)
+    print(f"video duration={duration}")
 
 test_download()
 test_ffmpeg()
