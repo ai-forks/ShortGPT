@@ -50,7 +50,7 @@ def test_pexels():
 def test_download():
     #url = "https://www.youtube.com/watch?v=V6l4E9tZ7u4"
     url = " https://player.vimeo.com/external/516795301.hd.mp4?s=b0c2091d3380693ee1e89f35a5ba821dc547ec80&profile_id=175&oauth2_token_id=57447761"
-    outputFile,duration = downloadYoutubeVideo(url)
+    outputFile = downloadYoutubeVideo(url)
     print(f"test_download outputFile={outputFile} duration={duration}")
     #outputFile="/app/videos/dl/2023/09/02/4ed84730d72f875b988e557e48a5818d.mp4"
     #duration = get_video_duration(outputFile)
