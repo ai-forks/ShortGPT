@@ -1,6 +1,6 @@
 import json
 import subprocess
-
+import os
 import yt_dlp
 
 from shortGPT.editing_utils.handle_videos import getYoutubeVideoLink
@@ -77,7 +77,7 @@ def getYoutubeAudioLink(url):
         "no_call_home": True,
         "no_check_certificate": True,
         "format": "bestaudio/best",
-        "proxy": os.environ['PROXY'] if 'PROXY' in os.environ else ""
+        "proxy": os.environ['PROXY'] if 'PROXY' in os.environ else "",
     }
     try:
         print(f"===>download youtube url={url}")

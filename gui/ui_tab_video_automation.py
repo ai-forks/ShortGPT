@@ -132,6 +132,8 @@ class VideoAutomationUI(AbstractComponentUI):
                         file_name = video_path.split("/")[-1].split("\\")[-1]
                         current_url = self.shortGptUI.share_url+"/" if self.shortGptUI.share else self.shortGptUI.local_url
                         file_url_path = f"{current_url}file={video_path}"
+                        print(f"sharturl={self.shortGptUI.share_url} share={self.shortGptUI.share}")
+
                         self.video_html = f'''
                             <div style="display: flex; flex-direction: column; align-items: center;">
                                 <video width="{600}" height="{300}" style="max-height: 100%;" controls>
