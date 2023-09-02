@@ -48,7 +48,8 @@ def test_pexels():
     print(f"test_pexels={json_data}")
 
 def test_download():
-    url = "https://www.youtube.com/watch?v=V6l4E9tZ7u4"
+    #url = "https://www.youtube.com/watch?v=V6l4E9tZ7u4"
+    url = " https://player.vimeo.com/external/516795301.hd.mp4?s=b0c2091d3380693ee1e89f35a5ba821dc547ec80&profile_id=175&oauth2_token_id=57447761"
     outputFile,duration = downloadYoutubeVideo(url)
     print(f"test_download outputFile={outputFile} duration={duration}")
 
