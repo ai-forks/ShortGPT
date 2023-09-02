@@ -47,20 +47,20 @@ def test_pexels():
     print(f"test_pexels={json_data}")
 
 def test_process_video_asset():
-    filename = "https://www.youtube.com/watch?v=V6l4E9tZ7u4"
-    video_url = filename
+    params = {"filename": "https://www.youtube.com/watch?v=V6l4E9tZ7u4"}
+    video_url = params["filename"]
     p = re.compile('^https?:\/\/')
 
     print(f" is youtube={ p.match(video_url) }")
     if p.match(video_url) :
-        filename = "/app/videos/dl/"+datetime.datetime.now().strftime('%Y/%m/%d')+"/"+ hashlib.md5(video_url.encode()).hexdigest()+".mp4"
+        params["filename"] = "/app/videos/dl/"+datetime.datetime.now().strftime('%Y/%m/%d')+"/"+ hashlib.md5(video_url.encode()).hexdigest()+".mp4"
         pyt = re.compile('.*youtube\.com')
         commond = [
             'yt-dlp', 
             "--proxy", os.environ['PROXY'] if 'PROXY' in os.environ else "",
             "-R", "333",
             f"-f{'22+139' if pyt.match(video_url) else 'mp4' }",
-            "-o", filename,
+            "-o", params["filename"],
             video_url
         ]            
         print(f"commond={' '.join(commond)}")

@@ -205,10 +205,10 @@ class CoreEditingEngine:
         print(f"process_video_asset step1 asset={asset}")
         print(f"process_video_asset step2 params={params}")
         # yt-dlp --proxy socks5://172.17.0.1:1080 -fmp4 -R 333  -o '%(channel_id)s/%(release_date)s/%(id)s.mp4' https://player.vimeo.com/external/516795301.hd.mp4?s=b0c2091d3380693ee1e89f35a5ba821dc547ec80&profile_id=175&oauth2_token_id=57447761 
-        video_url = params.filename
+        video_url = params["filename"]
         p = re.compile('^https?:\/\/')
         if p.match(video_url) :
-            params.filename = "/app/videos/dl/"+datetime.datetime.now().strftime('%Y/%m/%d')+"/"+ hashlib.md5(video_url.encode()).hexdigest()+".mp4"
+            params["filename"] = "/app/videos/dl/"+datetime.datetime.now().strftime('%Y/%m/%d')+"/"+ hashlib.md5(video_url.encode()).hexdigest()+".mp4"
             pyt = re.compile('.*youtube\.com')
             commond = [
                 'yt-dlp', 
