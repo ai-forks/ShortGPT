@@ -4,7 +4,6 @@ from moviepy.editor import (AudioFileClip, CompositeVideoClip,CompositeAudioClip
                             TextClip, VideoFileClip, vfx,)
 from shortGPT.audio.audio_duration import getYoutubeVideoLink
 from shortGPT.api_utils.pexels_api import search_videos
-from shortGPT.editing_framework.core_editing_engine import process_video_asset
 
 
 def test_ffmpeg():
