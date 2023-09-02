@@ -17,6 +17,7 @@ def getYoutubeVideoLink(url):
             "no_call_home": True,
             "no_check_certificate": True,
             "format": "bestvideo[height<=1920]",
+            "retries": 333,
             "proxy": os.environ['PROXY'] if 'PROXY' in os.environ else ""
         }
     else:
@@ -27,6 +28,7 @@ def getYoutubeVideoLink(url):
         "no_call_home": True,
         "no_check_certificate": True,
         "format": "bestvideo[height<=1080]",
+        "retries": 333,
         "proxy": os.environ['PROXY'] if 'PROXY' in os.environ else ""
         }
     try:

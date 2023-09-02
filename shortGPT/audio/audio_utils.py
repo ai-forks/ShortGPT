@@ -19,6 +19,7 @@ def downloadYoutubeAudio(url, outputFile):
         "no_check_certificate": True,
         "format": "bestaudio/best",
         "outtmpl": outputFile,
+        "retries": 333,
         "proxy": os.environ['PROXY'] if 'PROXY' in os.environ else ""
     }
     try:

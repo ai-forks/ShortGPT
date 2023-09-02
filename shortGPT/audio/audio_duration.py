@@ -13,6 +13,7 @@ def get_duration_yt_dlp(url):
         "no_color": True,
         "no_call_home": True,
         "no_check_certificate": True,
+        "retries": 333,
         "proxy": os.environ['PROXY'] if 'PROXY' in os.environ else ""
     }
     try:
@@ -77,6 +78,7 @@ def getYoutubeAudioLink(url):
         "no_call_home": True,
         "no_check_certificate": True,
         "format": "bestaudio/best",
+        "retries": 333,
         "proxy": os.environ['PROXY'] if 'PROXY' in os.environ else "",
     }
     try:
