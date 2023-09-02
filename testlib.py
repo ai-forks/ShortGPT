@@ -59,16 +59,10 @@ def test_process_video_asset():
             'yt-dlp', 
             "--proxy", os.environ['PROXY'] if 'PROXY' in os.environ else "",
             "-R", 333,
-            "-o", filename
-            #"-fmp4", video_url,
-            #video_url
-        ]
-        if pyt.match(video_url):
-            commond.append("-f22+139")
-        else:
-            commond.append("-fmp4")
-            
-        commond.append(video_url)
+            "-o", filename,
+            "-f{'22+139' if pyt.match(video_url) else 'mp4' }",
+            video_url
+        ]            
         print(f"commond={' '.join(commond)}")
         subprocess.run(commond)
 
