@@ -59,7 +59,7 @@ def test_process_video_asset():
             'yt-dlp', 
             "--proxy", os.environ['PROXY'] if 'PROXY' in os.environ else "",
             "-R", 333,
-            "-o", params.filename
+            "-o", filename
             #"-fmp4", video_url,
             #video_url
         ]
