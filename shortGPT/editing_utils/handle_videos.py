@@ -42,6 +42,10 @@ def getYoutubeVideoLink(url):
 
 def downloadYoutubeVideo(url):
     outputFile = "/app/videos/dl/"+datetime.datetime.now().strftime('%Y/%m/%d')+"/"+ hashlib.md5(url.encode()).hexdigest()+".mp4"
+    if os.path.exists(outputFile) :
+        duration = get_video_duration(outputFile)
+        return outputFile, duration
+
     pyt = re.compile('.*youtube\.com')
     ydl_opts = {
         "quiet": True,
@@ -71,12 +75,9 @@ def downloadYoutubeVideo(url):
     return None, None
 # 获取视频时长
 def get_video_duration(file):
-    probe = ffmpeg._probe(file)
-    format = probe['format']
-    bit_rate = int(format['bit_rate'])/1000
-    duration = format['duration']
-    size = int(format['size'])/1024/1024
-    return duration
+    probe = ffmpeg.probe(file)
+    print(f"info {probe}")
+    return 11
 
 def extract_random_clip_from_video(video_url, video_duration, clip_duration , output_file):
     print(video_url, video_duration, clip_duration , output_file)
