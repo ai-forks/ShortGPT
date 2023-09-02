@@ -7,6 +7,7 @@ from shortGPT.api_utils.pexels_api import search_videos
 import re
 import hashlib
 import datetime
+import os
 
 def test_ffmpeg():
     print(f"==============test lib ffmpeg")
@@ -56,7 +57,7 @@ def test_process_video_asset():
         pyt = re.compile('^youtube\.com')
         commond = [
             'yt-dlp', 
-            "--proxy", os.environ["PROXY"] if "PROXY" in os.environ else "",
+            "--proxy", os.environ['PROXY'] if 'PROXY' in os.environ else "",
             "-R", 333,
             "-o", params.filename
             #"-fmp4", video_url,
