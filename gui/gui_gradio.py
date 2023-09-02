@@ -26,7 +26,7 @@ class ShortGptUI(AbstractBaseUI):
             self.asset_library_ui = AssetLibrary().create_ui()
             self.config_ui = ConfigUI().create_ui()
         shortGptUI.share = True
-        shortGptUI.share_url = "/"
+        shortGptUI.share_url = ""
         return shortGptUI
 
     def launch(self):
