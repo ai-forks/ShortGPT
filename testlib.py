@@ -4,6 +4,7 @@ from moviepy.editor import (AudioFileClip, CompositeVideoClip,CompositeAudioClip
                             TextClip, VideoFileClip, vfx,)
 from shortGPT.audio.audio_duration import getYoutubeVideoLink
 from shortGPT.api_utils.pexels_api import search_videos
+from shortGPT.editing_framework.core_editing_engine import process_video_asset
 
 
 def test_ffmpeg():
@@ -42,6 +43,10 @@ def test_youtube():
 def test_pexels():
     json_data = search_videos("中国女孩")
     print(f"test_pexels={json_data}")
+
+def test_process_video_asset():
+    asset={'type': 'video', 'z': 0, 'inputs': {'parameters': ['url'], 'actions': ['set_time_start', 'set_time_end']}, 'parameters': {'url': 'https://player.vimeo.com/external/452169948.hd.mp4?s=140c7e10d2935c5a70aa83f7dca78b9012f5f159&profile_id=175&oauth2_token_id=57447761', 'audio': False}, 'actions': [{'type': 'set_time_start', 'param': 0.0}, {'type': 'set_time_end', 'param': 5.0}]}
+    #process_video_asset()
 
 test_ffmpeg()
 test_moviepy_editor()

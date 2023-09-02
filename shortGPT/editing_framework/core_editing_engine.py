@@ -193,12 +193,14 @@ class CoreEditingEngine:
     # Process individual asset types
     def process_video_asset(self, asset: Dict[str, Any]) -> VideoFileClip:
         params = {
-            'filename': handle_path(asset['parameters']['url'])
+            'filename': handle_path(asset['parameters']['url']),
+            'duration': asset['parameters']['duration'] if 'duration' in asset['parameters']['duration'] else 15
         }
         if 'audio' in asset['parameters']:
             params['audio'] = asset['parameters']['audio']
         print(f"process_video_asset step1 asset={asset}")
         print(f"process_video_asset step2 params={params}")
+
         clip = VideoFileClip(**params)
         print(f"process_video_asset step3 clip={clip}")
         return self.process_common_visual_actions(clip, asset['actions'])
