@@ -4,6 +4,8 @@ import random
 import yt_dlp
 import subprocess
 import json
+import hashlib
+import datetime
 
 def getYoutubeVideoLink(url):
     if 'shorts' in url:
@@ -33,6 +35,29 @@ def getYoutubeVideoLink(url):
                 url,
                 download=False)
             return dictMeta['url'], dictMeta['duration']
+    except Exception as e:
+        print("Failed getting video link from the following video/url", e.args[0])
+    return None, None
+
+def downloadYoutubeVideo(url):
+    outputFile = "/app/videos/dl/"+datetime.datetime.now().strftime('%Y/%m/%d')+"/"+ hashlib.md5(url.encode()).hexdigest()+".mp4"
+    ydl_opts = {
+        "quiet": True,
+        "no_warnings": True,
+        "no_color": True,
+        "no_call_home": True,
+        "no_check_certificate": True,
+        "format": "bestvideo[height<=1080]",
+        "outtmpl": outputFile,
+        "proxy": os.environ['PROXY'] if 'PROXY' in os.environ else ""
+    }
+    try:
+        print(f"===>download youtube url={url}")
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            dictMeta = ydl.extract_info(
+                url,
+                download=True)
+            return outputFile, dictMeta['duration']
     except Exception as e:
         print("Failed getting video link from the following video/url", e.args[0])
     return None, None

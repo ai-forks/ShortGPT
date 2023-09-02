@@ -4,6 +4,7 @@ from moviepy.editor import (AudioFileClip, CompositeVideoClip,CompositeAudioClip
                             TextClip, VideoFileClip, vfx,)
 from shortGPT.audio.audio_duration import getYoutubeVideoLink
 from shortGPT.api_utils.pexels_api import search_videos
+from shortGPT.editing_utils.handle_videos import downloadYoutubeVideo
 import re
 import hashlib
 import datetime
@@ -46,27 +47,12 @@ def test_pexels():
     json_data = search_videos("中国女孩")
     print(f"test_pexels={json_data}")
 
-def test_process_video_asset():
-    params = {"filename": "https://www.youtube.com/watch?v=V6l4E9tZ7u4"}
-    video_url = params["filename"]
-    p = re.compile('^https?:\/\/')
+def test_download():
+    url = "https://www.youtube.com/watch?v=V6l4E9tZ7u4"
+    outputFile,duration = downloadYoutubeVideo(url)
+    print(f"test_download outputFile={outputFile} duration={duration}")
 
-    print(f" is youtube={ p.match(video_url) }")
-    if p.match(video_url) :
-        params["filename"] = "/app/videos/dl/"+datetime.datetime.now().strftime('%Y/%m/%d')+"/"+ hashlib.md5(video_url.encode()).hexdigest()+".mp4"
-        pyt = re.compile('.*youtube\.com')
-        commond = [
-            'yt-dlp', 
-            "--proxy", os.environ['PROXY'] if 'PROXY' in os.environ else "",
-            "-R", "333",
-            f"-f{'22+139' if pyt.match(video_url) else 'mp4' }",
-            "-o", params["filename"],
-            video_url
-        ]            
-        print(f"commond={' '.join(commond)}")
-        subprocess.run(commond)
-
-test_process_video_asset()
+test_download()
 test_ffmpeg()
 test_moviepy_editor()
 test_youtube()
