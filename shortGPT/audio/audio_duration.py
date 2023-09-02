@@ -38,6 +38,8 @@ def get_duration_ffprobe(signed_url):
             signed_url
         ]
         output = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        print(f"get_duration_ffprobe cmd={cmd}")
+        print(f"get_duration_ffprobe output={output}")
 
         if output.returncode != 0:
             return None, f"Error executing command using ffprobe. {output.stderr.strip()}"
