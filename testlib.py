@@ -63,7 +63,7 @@ def test_process_video_asset():
             #"-fmp4", video_url,
             #video_url
         ]
-        if pty.match(video_url):
+        if pyt.match(video_url):
             commond.append("-f22+139")
         else:
             commond.append("-fmp4")
