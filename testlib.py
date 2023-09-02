@@ -54,7 +54,7 @@ def test_process_video_asset():
     print(f" is youtube={ p.match(video_url) }")
     if p.match(video_url) :
         filename = "/app/videos/dl/"+datetime.datetime.now().strftime('%Y/%m/%d')+"/"+ hashlib.md5(video_url.encode()).hexdigest()+".mp4"
-        pyt = re.compile('youtube\.com')
+        pyt = re.compile('.*youtube\.com')
         commond = [
             'yt-dlp', 
             "--proxy", os.environ['PROXY'] if 'PROXY' in os.environ else "",

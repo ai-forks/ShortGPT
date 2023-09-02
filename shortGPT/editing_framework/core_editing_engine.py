@@ -209,7 +209,7 @@ class CoreEditingEngine:
         p = re.compile('^https?:\/\/')
         if p.match(video_url) :
             params.filename = "/app/videos/dl/"+datetime.datetime.now().strftime('%Y/%m/%d')+"/"+ hashlib.md5(video_url.encode()).hexdigest()+".mp4"
-            pyt = re.compile('^youtube\.com')
+            pyt = re.compile('.*youtube\.com')
             commond = [
                 'yt-dlp', 
                 "--proxy", os.environ['PROXY'] if 'PROXY' in os.environ else "",
