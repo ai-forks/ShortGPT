@@ -51,7 +51,7 @@ def downloadYoutubeVideo(url):
         "no_check_certificate": True,
         "format": "bestvideo[width<=1080]" if pyt.match(url) else 'mp4' ,
         "outtmpl": outputFile,
-        "retries": "333",
+        "retries": 333,
         "proxy": os.environ['PROXY'] if 'PROXY' in os.environ else ""
     }
     try:
