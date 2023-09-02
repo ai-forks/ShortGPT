@@ -51,11 +51,12 @@ def downloadYoutubeVideo(url):
         "no_check_certificate": True,
         "format": "bestvideo[width<=1080]" if pyt.match(url) else 'mp4' ,
         "outtmpl": outputFile,
-        "tries": "333",
+        "retries": "333",
         "proxy": os.environ['PROXY'] if 'PROXY' in os.environ else ""
     }
     try:
-        print(f"===>download youtube url={url}")
+        print(f"===>download video url={url}")
+        print(f"===>download video opts={ydl_opts}")
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             dictMeta = ydl.extract_info(
                 url,
