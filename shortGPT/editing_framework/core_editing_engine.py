@@ -194,7 +194,7 @@ class CoreEditingEngine:
     def process_video_asset(self, asset: Dict[str, Any]) -> VideoFileClip:
         params = {
             'filename': handle_path(asset['parameters']['url']),
-            'duration': asset['parameters']['duration'] if 'duration' in asset['parameters'] else 15
+            #'duration': asset['parameters']['duration'] if 'duration' in asset['parameters'] else 15
         }
         if 'audio' in asset['parameters']:
             params['audio'] = asset['parameters']['audio']
