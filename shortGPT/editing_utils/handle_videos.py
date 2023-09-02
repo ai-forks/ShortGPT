@@ -41,13 +41,14 @@ def getYoutubeVideoLink(url):
 
 def downloadYoutubeVideo(url):
     outputFile = "/app/videos/dl/"+datetime.datetime.now().strftime('%Y/%m/%d')+"/"+ hashlib.md5(url.encode()).hexdigest()+".mp4"
+    pyt = re.compile('.*youtube\.com')
     ydl_opts = {
         "quiet": True,
         "no_warnings": True,
         "no_color": True,
         "no_call_home": True,
         "no_check_certificate": True,
-        "format": "bestvideo[width<=1080]",
+        "format": "bestvideo[width<=1080]" if pyt.match(video_url) else 'mp4' ,
         "outtmpl": outputFile,
         "tries": "333",
         "proxy": os.environ['PROXY'] if 'PROXY' in os.environ else ""
