@@ -47,7 +47,7 @@ def downloadYoutubeVideo(url):
         "no_color": True,
         "no_call_home": True,
         "no_check_certificate": True,
-        "format": "bestvideo[height<=1080]",
+        "format": "bestvideo[width<=1080]",
         "outtmpl": outputFile,
         "proxy": os.environ['PROXY'] if 'PROXY' in os.environ else ""
     }
