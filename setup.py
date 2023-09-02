@@ -23,7 +23,7 @@ setup(
     packages=find_packages(),
     package_data={'': ['*.yaml', '*.json']},    # This will include all yaml files in package
     install_requires=[
-        'ffmpeg-python', 
+        'ffmpeg', 
         'python-dotenv', 
         'openai', 
         'tiktoken',
