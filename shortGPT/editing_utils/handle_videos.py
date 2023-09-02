@@ -61,6 +61,7 @@ def downloadYoutubeVideo(url):
             dictMeta = ydl.extract_info(
                 url,
                 download=True)
+            print(f"===>download end {dictMeta}")
             return outputFile, dictMeta['duration']
     except Exception as e:
         print("Failed getting video link from the following video/url", e.args[0])
