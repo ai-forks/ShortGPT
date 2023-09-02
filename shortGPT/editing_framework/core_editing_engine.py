@@ -12,6 +12,10 @@ from moviepy.editor import (AudioFileClip, CompositeVideoClip,CompositeAudioClip
 from moviepy.audio.fx.audio_loop import audio_loop
 from moviepy.audio.fx.audio_normalize import audio_normalize
 from shortGPT.editing_framework.rendering_logger import MoviepyProgressLogger
+import subprocess
+import re
+import datetime
+import hashlib
 
 def load_schema(json_path):
     return json.loads(open(json_path, 'r', encoding='utf-8').read())
@@ -200,7 +204,21 @@ class CoreEditingEngine:
             params['audio'] = asset['parameters']['audio']
         print(f"process_video_asset step1 asset={asset}")
         print(f"process_video_asset step2 params={params}")
-
+        # yt-dlp --proxy socks5://172.17.0.1:1080 -fmp4 -R 333  -o '%(channel_id)s/%(release_date)s/%(id)s.mp4' https://player.vimeo.com/external/516795301.hd.mp4?s=b0c2091d3380693ee1e89f35a5ba821dc547ec80&profile_id=175&oauth2_token_id=57447761 
+        video_url = params.filename
+        p = re.compile('^https?:\/\/')
+        if(p.match(video_url)):
+            params.filename = "/app/videos/dl/"+datetime.datetime.now().strftime('%Y/%m/%d')+"/"+ hashlib.md5(video_url.encode()).hexdigest()
+            commond = [
+                'yt-dlp', 
+                "--proxy", os.environ["PROXY"] if "PROXY" in os.environ else "",
+                "-R", 333,
+                "-o", params.filename,
+                "-fmp4", video_url,
+                video_url
+            ]
+            print(f"commond={' '.join(commond)}")
+            subprocess.run(commond)
         clip = VideoFileClip(**params)
         print(f"process_video_asset step3 clip={clip}")
         return self.process_common_visual_actions(clip, asset['actions'])
