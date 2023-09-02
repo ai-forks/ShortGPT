@@ -6,6 +6,7 @@ import subprocess
 import json
 import hashlib
 import datetime
+import re
 
 def getYoutubeVideoLink(url):
     if 'shorts' in url:
