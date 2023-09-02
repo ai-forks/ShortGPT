@@ -197,6 +197,7 @@ class CoreEditingEngine:
         }
         if 'audio' in asset['parameters']:
             params['audio'] = asset['parameters']['audio']
+        print(f"process_video_asset params={params}")
         clip = VideoFileClip(**params)
         return self.process_common_visual_actions(clip, asset['actions'])
 
